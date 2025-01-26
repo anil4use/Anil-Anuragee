@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Example of a URL entry -->
+  <url>
+    <loc>https://anil-anuragee.netlify.app/</loc> <!-- Homepage URL -->
+    <lastmod>2025-01-26</lastmod> <!-- Date the page was last modified -->
+    <changefreq>daily</changefreq> <!-- How frequently the page is likely to change -->
+    <priority>1.0</priority> <!-- Page priority (1.0 is highest priority) -->
+  </url>
+
+  <!-- Example for another page -->
+  <url>
+    <loc>https://anil-anuragee.netlify.app</loc> <!-- About page URL -->
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Add additional URLs for your portfolio -->
+  <url>
+    <loc>https://anil-anuragee.netlify.app</loc> <!-- Contact page URL -->
+    <lastmod>2025-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Include any other important pages here -->
+
+</urlset>

@@ -4,7 +4,7 @@ Welcome to the portfolio of **Anil Anuragee**, a Full Stack Developer specializi
 
 ## Live Demo
 
-Visit the live portfolio: [https://your-portfolio-domain.com](https://your-portfolio-domain.com)
+Visit the live portfolio: [https://anil-anuragee.netlify.app/](https://anil-anuragee.netlify.app/)
 
 ---
 
@@ -35,8 +35,7 @@ Follow the steps below to set up the portfolio locally:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/portfolio.git
-   cd portfolio
+   git clone https://github.com/anil4use/Anil-Anuragee.git
 
    
 ## Made with ❤️ by Anil Anuragee

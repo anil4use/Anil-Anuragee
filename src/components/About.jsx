@@ -11,9 +11,9 @@ const About = () => {
     jobTitle: "Full Stack Developer",
     worksFor: {
       "@type": "Organization",
-      name: "Your Portfolio"
+      name: "Anil Anuragee",
     },
-    url: "https://www.yourportfolio.com",
+    url: "https://anil-anuragee.netlify.app/",
     sameAs: [
       "https://www.linkedin.com/in/yourprofile",
       "https://github.com/yourprofile"
@@ -38,8 +38,8 @@ const About = () => {
           content="Learn more about Anil Anuragee, a passionate full-stack developer with expertise in React.js, Node.js, and more."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.yourportfolio.com" />
-        <meta property="og:image" content="https://www.yourportfolio.com/your-image.jpg" />
+        <meta property="og:url" content="https://anil-anuragee.netlify.app/" />
+        <meta property="og:image" content="https://anil-anuragee.netlify.app/assets/Anil-BkIPreYO.jpg" />
       </Helmet>
       <motion.h1
         whileInView={{ opacity: 1, y: 0 }}

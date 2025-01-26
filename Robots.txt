@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /private/
-Sitemap: https://your-portfolio-domain.com/sitemap.xml
+Sitemap: https://anil-anuragee.netlify.app/sitemap.xml

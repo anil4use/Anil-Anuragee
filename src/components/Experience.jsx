@@ -20,8 +20,8 @@ const Experience = () => {
           content="Explore my professional experience as a Full Stack Developer, including the roles I've held, technologies I've worked with, and the impact I've made."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.yourportfolio.com/experience" />
-        <meta property="og:image" content="https://www.yourportfolio.com/your-image.jpg" />
+        <meta property="og:url" content="https://anil-anuragee.netlify.app/" />
+        <meta property="og:image" content="https://anil-anuragee.netlify.app/" />
       </Helmet>
       <motion.h1
         whileInView={{ opacity: 1, y: 0 }}
