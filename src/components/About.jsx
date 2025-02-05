@@ -20,7 +20,7 @@ const About = () => {
     ]
   };
   return (
-    <div className="border-b border-neutral-900 pb-4">
+    <div className="border-b border-neutral-900 pb-4 w-[100%] m-auto">
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify(schemaMarkup)}
@@ -96,7 +96,8 @@ const About = () => {
               >
                 I am a passionate and driven Full Stack Developer with a deep interest in creating innovative and user-centric web applications. With over a year and a half of experience, I specialize in building modern web applications using React.js, Node.js, and Express.js. My goal is always to enhance user experience and deliver seamless, efficient solutions.
               </motion.span>
-
+<br/>
+<br/>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -110,6 +111,8 @@ const About = () => {
                 initial={{ opacity: 0 }}
                 transition={{ duration: 1, delay: 0.3 }}
               >
+                <br/>
+                <br/>
                 What excites me most about web development is the ability to create something that users interact with daily, solving real problems and improving efficiency. This is why I take pride in delivering high-quality code and ensuring performance optimization in every project I undertake.
               </motion.div>
 

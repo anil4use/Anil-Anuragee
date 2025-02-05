@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 
 const Experience = () => {
   return (
-    <div className="border-b border-neutral-900 pb-4">
+    <div className="border-b w-[100%] m-auto border-neutral-900 pb-4">
       <Helmet>
         <meta
           name="description"

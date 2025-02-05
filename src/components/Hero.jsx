@@ -20,10 +20,9 @@ const Hero = () => {
     },
   });
 
-  const lettersAnil = "ANIL".split(""); // Split the "ANIL" part
-  const lettersAnuragee = "ANURAGEE".split(""); // Split the "ANURAGEE" part
+  const lettersAnil = "ANIL".split("");
+  const lettersAnuragee = "ANURAGEE".split("");
 
-  // Array of gradients for each letter
   const gradients = [
     "linear-gradient(to right, #FF7A00, #F02C2C, #5A2D8A)",
     "linear-gradient(to right, #4C9EF8, #6A40F1, #00D4FF)",
@@ -40,59 +39,68 @@ const Hero = () => {
   ];
 
   return (
-    <div className="border-b border-neutral-900 pb-4 lg:mb-35 mt-20">
-      <div className="flex flex-wrap">
-        <div className="w-full lg:w-1/2">
+    <div className="border-b border-neutral-900  pb-4 lg:mb-35  w-[100%] m-auto ">
+      <div className="flex flex-wrap  justify-around ">
+        <div className=" place-content-center">
           <div className="flex flex-col items-center lg:items-start">
-            <div className="pb-16  text-5xl md:text-6xl font-thin tracking-tight lg:mt-16 lg:text-8xl">
-              {lettersAnil.map((letter, index) => (
-                <motion.span
-                  key={index}
-                  variants={container(0)}
-                  initial="hidden"
-                  animate="visible"
-                  className="inline-block"
-                  style={{
-                    color: "white", // Default text color (white)
-                    transition: "color 0.5s", // Smooth transition when changing to gradient
-                    background: gradients[index], // Unique gradient for each letter
-                    WebkitBackgroundClip: "text", // Clip the background to the text
-                    backgroundClip: "text", // Standard background clip (for some browsers)
-                    display: "inline-block",
-                  }}
-                  whileHover={{
-                    color: "transparent", // On hover, make text transparent
-                    transition: "color 0.5s", // Smooth transition for gradient color
-                  }}
-                >
-                  {letter}
-                </motion.span>
-              ))}
-              <motion.span className="inline-block mx-1 md:mx-4" style={{ color: "white" }}>
-              </motion.span>
-              {lettersAnuragee.map((letter, index) => (
-                <motion.span
-                  key={index}
-                  variants={container(0)}
-                  initial="hidden"
-                  animate="visible"
-                  className="inline-block"
-                  style={{
-                    color: "white",
-                    transition: "color 0.5s",
-                    background: gradients[lettersAnil.length + index],
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    display: "inline-block",
-                  }}
-                  whileHover={{
-                    color: "transparent",
-                    transition: "color 0.5s",
-                  }}
-                >
-                  {letter}
-                </motion.span>
-              ))}
+            <div className="pb-4 flex  w-[100%] gap-0  flex-col md:flex-row  text-5xl md:text-6xl font-thin tracking-tight lg:mt-16 lg:text-7xl">
+              <div >
+                {lettersAnil.map((letter, index) => (
+                  <motion.span
+                    key={index}
+                    variants={container(0)}
+                    initial="hidden"
+                    animate="visible"
+                    className="inline-block"
+                    style={{
+                      color: "white",
+                      transition: "color 0.5s",
+                      background: gradients[index],
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                      display: "inline-block",
+                    }}
+                    whileHover={{
+                      color: "transparent",
+                      transition: "color 0.5s",
+                    }}
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </div>
+              <span className=" hidden md:block">
+                &nbsp;
+              </span>
+              <div>
+                {lettersAnuragee.map((letter, index) => (
+                  <motion.span
+                    key={index}
+                    variants={container(0)}
+                    initial="hidden"
+                    animate="visible"
+                    className="inline-block"
+                    style={{
+                      color: "white",
+                      transition: "color 0.5s",
+                      background: gradients[lettersAnil.length + index],
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                      display: "inline-block",
+                    }}
+                    whileHover={{
+                      color: "transparent",
+                      transition: "color 0.5s",
+                    }}
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </div>
+
+              {/* <motion.span className="inline-block mx- md:mx-4" style={{ color: "white" }}>
+              </motion.span> */}
+
             </div>
 
             <motion.span
@@ -104,7 +112,7 @@ const Hero = () => {
                 repeatType: "loop",
                 duration: 3,
               }}
-              className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-3xl tracking-tight text-transparent animate-gradient-x bg-[length:200%_200%]"
+              className="bg-gradient-to-r w-[100%] from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-3xl tracking-tight text-transparent animate-gradient-x bg-[length:200%_200%]"
             >
               FULL STACK DEVELOPER
             </motion.span>
@@ -120,11 +128,11 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="md:-mt-28 w-full lg:w-1/2 lg:p-8">
-          <div className="flex justify-center">
+        <div className=" lg:p-8">
+          <div className="flex m-auto lg:w-[45vh] md:w-[400px]  justify-center">
             <motion.img
-              height={400}
-              width={400}
+              height={"100%"}
+              width={"100%"}
               className="rounded-lg"
               whileInView={{ x: 0, opacity: 1 }}
               initial={{ x: 100, opacity: 0 }}

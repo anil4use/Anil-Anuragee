@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const Navbar = () => {
   return (
-    <nav className=" -mt-6 mb-20 flex items-center justify-between py-6">
+    <nav className="w-[103%] md:w-[83%] m-auto  flex items-center justify-between ">
       <div className="flex flex-shrink-0 items-center">
         <h2 className="text-3xl">𝞓𝞰𝙞𝞲</h2>
       </div>
@@ -29,7 +29,7 @@ const Navbar = () => {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.2, rotate: -15 }}
           whileTap={{ scale: 0.9 }}
-          className="text-gray-800"
+          className="text-gray-300"
         >
           <FaGithub />
         </motion.a>

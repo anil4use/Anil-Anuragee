@@ -16,23 +16,23 @@ export default function App() {
         <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
       </div>
       <div className="cursor__dot">
-        <AnimatedCursor
-          innerSize={15}
+        <AnimatedCursor  innerSize={15}
           outerSize={15}
           color="255, 255 ,255"
           outerAlpha={0.4}
           innerScale={0.7}
           outerScale={5}
-        /></div>
-         {/* <AnimatedCursor
-        innerSize={20}
+        />
+        </div>
+      <AnimatedCursor innerSize={20}
         outerSize={24}
-        color="255, 147, 1"
+        color="255, 255 ,255"
         outerAlpha={0.9}
         innerScale={0.9}
         outerScale={0.1}
-      /> */}
-      <div className="container mx-auto px-2 md:px-8">
+      />
+      {/* <div className="container"> */}
+      <div className="m-auto max-w-[1600px] p-3  container flex flex-col">
         <Navbar />
         <Hero />
         <About />
