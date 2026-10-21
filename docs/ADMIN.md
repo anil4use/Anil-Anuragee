@@ -16,7 +16,7 @@ The public site runs at `http://localhost:3000/`; the admin panel is at
 For deployment, set `NEXT_PUBLIC_SITE_URL` to the real canonical HTTPS URL before building. Configure
 admin credentials, the session secret, MongoDB, Cloudinary, and any AI provider keys as server-side
 environment variables. Never expose secrets through `NEXT_PUBLIC_` variables.
-Deploy with `netlify.web.toml`; the admin panel is part of that site, not a separate deployment.
+Deploy with the root `netlify.toml`; the admin panel is part of that site, not a separate deployment.
 
 When consolidating an existing setup, move required values from `apps/admin/.env.local` to
 `apps/web/.env.local`; the unified app does not load the former.

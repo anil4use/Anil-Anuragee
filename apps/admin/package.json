@@ -8,17 +8,17 @@
     "typecheck": "npm run typecheck --workspace web"
   },
   "dependencies": {
-    "next": "15.3.3",
+    "@anil-portfolio/db": "*",
+    "next": "^15.5.28",
     "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "@anil-portfolio/db": "*"
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "eslint": "^9.15.0",
-    "eslint-config-next": "15.3.3",
+    "eslint-config-next": "^15.5.28",
     "typescript": "^5.7.3"
   }
 }

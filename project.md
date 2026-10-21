@@ -165,7 +165,7 @@ Add indexes (unique slugs, status+publishedAt, text index for search), TTL index
 ==================================================
 10. NETLIFY DEPLOYMENT
 ==================================================
-- Two Netlify sites from the one repo: web (public) and admin (private). Provide a netlify.toml for each app with the correct build command (for example turbo run build --filter=...), base/publish settings, Node version, security headers, and the Next.js runtime. Check Netlify's current monorepo and Next.js documentation and follow it; list the exact dashboard settings in docs/DEPLOY-NETLIFY.md.
+- Deploy one unified Netlify site from the repository root using the root netlify.toml. The public portfolio and admin panel are routes in the same Next.js app; configure the build command, functions directory, Node version, and Next.js runtime there. Document required dashboard environment variables and domain settings.
 - Environment variables documented in .env.example with comments: MONGODB_URI, AUTH_SECRET, ENCRYPTION_KEY, ADMIN_ALLOWED_EMAILS, WEB_URL, ADMIN_URL, REVALIDATE_SECRET, CLOUDINARY_*, RESEND_API_KEY, TURNSTILE_*, ANTHROPIC_API_KEY (optional), AI_ENABLED, rate-limit store settings.
 - Preview deploys must not use the production database; document separate Atlas databases/users.
 - Include a domain section: keep https://anil-anuragee.netlify.app working or redirect it to the final domain, plus steps for a custom domain and Search Console.

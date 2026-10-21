@@ -31,7 +31,7 @@ Configure the unified app's values in `apps/web/.env.local` and database seed va
    Never deploy with `localhost` or the example domain: this value is used for canonical metadata,
    structured data, Open Graph URLs, and the sitemap. Set `ADMIN_ORIGIN` to the same origin as the
    app (`http://localhost:3000` for local development).
-5. Deploy the unified app with `netlify.web.toml` and configure the required variables once in that
+5. Deploy the unified app with the root `netlify.toml` and configure the required variables once in that
    site's server-side environment settings. Use production-only values; do not upload local
    `.env.local` files.
 6. For AI article generation, add the selected provider key to `apps/web/.env.local`
