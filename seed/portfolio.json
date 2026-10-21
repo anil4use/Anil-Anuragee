@@ -1,0 +1,283 @@
+{
+  "site": {
+    "name": "Anil Anuragee",
+    "title": "Anil Anuragee – AI-Native Full Stack Engineer",
+    "tagline": "AI-native full stack engineer",
+    "location": "Indore, India",
+    "email": "anilanuragianuragi712@gmail.com",
+    "phone": "+91 83492 83228",
+    "linkedin": "https://www.linkedin.com/in/anil-anuragee/",
+    "github": "https://github.com/anil4use",
+    "sourceRepository": "https://github.com/anil4use/Anil-Anuragee",
+    "resumeUrl": "/resume/Anil_Anuragee_Resume.pdf",
+    "summary": "3 years of shipping production web apps and AI-powered features with React, TypeScript, Node.js, and MySQL.",
+    "openTo": ["Remote / Hybrid / On-site", "Full-stack roles", "Node.js-focused product engineering"]
+  },
+  "hero": {
+    "roles": [
+      "AI-Native Full Stack Engineer",
+      "React · Next.js · TypeScript",
+      "Node.js · MySQL · Redis",
+      "Building AI pipelines with Gemini"
+    ],
+    "headline": "Hi, I’m Anil Anuragee",
+    "photoUrl": "/images/anil-anuragee-full-stack-developer.jpg",
+    "photoAlt": "Portrait of Anil Anuragee, AI-Native Full Stack Engineer",
+    "lead": "3 years of shipping production web apps and AI-powered features with React, TypeScript, Node.js, and MySQL. At Aripra Infotech I build the backend and AI pipelines behind Audiofy, which analyzes calls and desk recordings for a whole client base.",
+    "socialLinks": [
+      { "label": "LinkedIn · 1,084 followers", "href": "https://www.linkedin.com/in/anil-anuragee/" },
+      { "label": "GitHub", "href": "https://github.com/anil4use" },
+      { "label": "Email", "href": "mailto:anilanuragianuragi712@gmail.com" }
+    ]
+  },
+  "about": {
+    "title": "About",
+    "content": [
+      "I build production-grade web platforms where design, API contracts, AI automation, and product thinking work together.",
+      "My work spans React/Next.js applications, Node.js backends, database design, and AI-assisted workflows for teams shipping faster without compromising quality.",
+      "I’m especially interested in AI-native product experiences, scalable APIs, and audio intelligence systems."
+    ],
+    "highlights": [
+      "Full-stack ownership from API design to deployment",
+      "AI product workflows with Claude and Gemini",
+      "Frontend systems with reusable component architecture"
+    ],
+    "stats": [
+      { "value": "3", "suffix": "Y", "label": "Product experience" },
+      { "value": "160+", "suffix": "+", "label": "GitHub contributions" },
+      { "value": "4", "suffix": "x", "label": "Product delivery areas" },
+      { "value": "A+", "suffix": "", "label": "B.Tech grade" }
+    ]
+  },
+  "audiofy": {
+    "title": "Audiofy",
+    "description": "AI-powered audio intelligence product focused on speech analysis, diarization, scoring, and workflow integration.",
+    "metrics": [
+      { "title": "AI voice evaluation", "value": "Speech model workflows" },
+      { "title": "MySQL-backed pipelines", "value": "High-volume data processing" },
+      { "title": "Client-scale deployment", "value": "Live production systems" }
+    ]
+  },
+  "skills": {
+    "title": "Skills & stack",
+    "subtitle": "Everything I work with across product, data, AI, and delivery. Filter by area or search.",
+    "categories": {
+      "Frontend": [
+        "React.js",
+        "Next.js",
+        "TypeScript",
+        "JavaScript (ES6+)",
+        "HTML5",
+        "CSS3",
+        "Tailwind CSS",
+        "Material-UI (MUI)",
+        "MUI DataGrid",
+        "Chakra UI",
+        "Bootstrap",
+        "Redux Toolkit",
+        "Framer Motion",
+        "Responsive design",
+        "Accessibility (a11y)",
+        "Reusable component libraries"
+      ],
+      "Backend": [
+        "Node.js",
+        "Express.js",
+        "REST API design",
+        "GraphQL",
+        "Socket.io",
+        "Real-time streaming",
+        "Webhook integrations",
+        "Authentication",
+        "Role-based access control"
+      ],
+      "Databases": [
+        "MySQL",
+        "MongoDB",
+        "Redis",
+        "Schema design",
+        "Query optimization",
+        "Caching strategies",
+        "Job queues & leaderboards"
+      ],
+      "AI & Audio": [
+        "Google Gemini AI",
+        "Prompt engineering",
+        "Parakeet (ASR)",
+        "NeMo / Sortformer",
+        "CAM++ voice-print ID",
+        "Speaker diarization",
+        "Agentic AI development",
+        "Claude & Claude Code"
+      ],
+      "DevOps & Cloud": [
+        "Docker",
+        "CI/CD",
+        "GitHub Actions",
+        "Vercel",
+        "AWS",
+        "Netlify",
+        "Performance optimization",
+        "System monitoring"
+      ],
+      "Integrations": [
+        "Razorpay payments",
+        "MapBox maps",
+        "Figma API",
+        "Telephony webhooks",
+        "Day.js"
+      ],
+      "Ways of working": [
+        "Stakeholder collaboration",
+        "API contract design",
+        "Performance optimization",
+        "Code reviews",
+        "Owning features end to end"
+      ]
+    },
+    "strengths": [
+      { "label": "React.js / Next.js", "level": 92 },
+      { "label": "Node.js / Express", "level": 90 },
+      { "label": "TypeScript", "level": 88 },
+      { "label": "MySQL / MongoDB", "level": 85 },
+      { "label": "AI integration (Gemini & audio ML)", "level": 82 }
+    ]
+  },
+  "experience": [
+    {
+      "period": "Apr 2025 – Present · Indore",
+      "role": "Software Engineer",
+      "company": "Aripra Infotech Pvt. Ltd.",
+      "companyUrl": "https://aripratech.com/",
+      "bullets": [
+        "Own full-stack development for internal AI products across TypeScript/React and Node.js/MySQL.",
+        "Design and optimize MySQL schemas for high-volume audio analysis.",
+        "Build the APIs behind transcription, diarization, and Gemini-based scoring used in production by clients.",
+        "Core contributor to Audiofy, from initial architecture to release."
+      ],
+      "tags": ["TypeScript", "MySQL", "Gemini AI", "Redis"]
+    },
+    {
+      "period": "Sep 2024 – Apr 2025 · Indore",
+      "role": "Full Stack Developer",
+      "company": "Docusoft Solution India Pvt. Ltd.",
+      "companyUrl": "https://www.docusoft.net/",
+      "bullets": [
+        "Owned front-end features for UK-based clients, translating stakeholder requirements into production UI.",
+        "Built a reusable React component library that reduced duplicate code and sped up new screens."
+      ],
+      "tags": ["React.js", "Next.js", "TypeScript"]
+    },
+    {
+      "period": "Sep 2023 – Sep 2024 · Indore",
+      "role": "Full Stack Developer",
+      "company": "Next Gen Tech Services (NGTS)",
+      "companyUrl": "https://www.ngtsindore.in/",
+      "bullets": [
+        "Delivered full-stack features from API design to UI with consistent API contracts.",
+        "Shipped accessible, responsive client-facing products and passed 160+ GitHub contributions within months.",
+        "Learned and shipped Next.js on live client projects."
+      ],
+      "tags": ["React.js", "Node.js", "MongoDB", "AWS"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "E-Kisan",
+      "emoji": "🌾",
+      "description": "Marketplace for farmers with MapBox store locator, Razorpay payments, and advanced filtering and sorting.",
+      "tags": ["React", "Redux Toolkit", "Tailwind", "MapBox"]
+    },
+    {
+      "name": "RE-Course",
+      "emoji": "🎓",
+      "description": "E-learning platform with keyword search, Razorpay checkout, authentication, and an admin dashboard for users and courses.",
+      "tags": ["React", "Node.js", "MongoDB", "Chakra UI"]
+    },
+    {
+      "name": "NeutriCare",
+      "emoji": "🥗",
+      "description": "Diet-plan app with customizable plans based on inputs and subscription management.",
+      "tags": ["React", "Bootstrap"]
+    },
+    {
+      "name": "Accelerated",
+      "emoji": "📈",
+      "description": "Platform that expands web app reach through A/B testing, with licensing and performance tracking.",
+      "tags": ["Express", "MongoDB", "GraphQL"]
+    },
+    {
+      "name": "Figma-to-code workflow",
+      "emoji": "🎨",
+      "description": "A structured Claude Code prompt that pulls Figma node data via API, extracts CSS tokens, and runs a pixel-perfect audit to cut review cycles. Shared publicly with the community.",
+      "tags": ["Claude Code", "Figma API", "React", "Tailwind"]
+    }
+  ],
+  "journey": [
+    { "date": "Jul 2020", "title": "Started B.Tech in Computer Science Engineering." },
+    { "date": "Mar 2024", "title": "Graduated with Grade A+." },
+    { "date": "Sep 2023", "title": "Joined NGTS, built full-stack features and learned Next.js on live projects." },
+    { "date": "Sep 2024", "title": "Moved to Docusoft for UK client front-end work." },
+    { "date": "Jan 2025", "title": "Launched my first personal portfolio." },
+    { "date": "Apr 2025", "title": "Joined Aripra Infotech, started building Audiofy." },
+    { "date": "Sep 2026", "title": "Earned Anthropic’s Claude Code 101 and Claude 101 certificates." }
+  ],
+  "credential": {
+    "title": "Credentials & education",
+    "subtitle": "Formal training plus continuous learning in AI-assisted development.",
+    "items": [
+      {
+        "name": "B.Tech, Computer Science Engineering",
+        "meta": "Shri Krishna University, Chhatarpur (M.P.)\nJul 2020 – Mar 2024 · Grade A+",
+        "icon": "🎓"
+      },
+      {
+        "name": "Anthropic certificates",
+        "meta": "Claude Code 101 and Claude 101, both completed and issued Sep 2026.",
+        "icon": "🏅",
+        "tags": ["Agentic AI Development", "Claude Code"]
+      }
+    ]
+  },
+  "writing": [
+    {
+      "title": "Figma → code, pixel-perfect",
+      "description": "A structured Claude Code prompt that extracts CSS tokens from the Figma API and audits the build.",
+      "href": "https://www.linkedin.com/in/anil-anuragee/",
+      "icon": "🎨"
+    },
+    {
+      "title": "160+ GitHub contributions",
+      "description": "A milestone reached within months at NGTS, shared with the team that helped me grow.",
+      "href": "https://www.linkedin.com/in/anil-anuragee/",
+      "icon": "💻"
+    },
+    {
+      "title": "Portfolio launch",
+      "description": "Where it started: my first portfolio with projects, skills, and approach to development.",
+      "href": "https://www.linkedin.com/in/anil-anuragee/",
+      "icon": "🌐"
+    }
+  ],
+  "sectionCopy": {
+    "experienceTitle": "Work experience",
+    "projectsTitle": "More projects",
+    "projectsSubtitle": "Products built across e-commerce, e-learning, health, and growth tooling.",
+    "journeyTitle": "My journey",
+    "journeySubtitle": "From campus to AI products in production.",
+    "writingTitle": "Sharing & community",
+    "writingSubtitle": "I post about what I build and learn. Follow along on LinkedIn.",
+    "blogTitle": "Engineering notes",
+    "blogSubtitle": "Articles about AI product engineering, full-stack development, and frontend workflows."
+  },
+  "contact": {
+    "title": "Let’s build something",
+    "subtitle": "Open to full-stack and Node.js-focused roles. Say hello, I reply fast.",
+    "methods": [
+      { "label": "Email", "value": "anilanuragianuragi712@gmail.com", "href": "mailto:anilanuragianuragi712@gmail.com" },
+      { "label": "Phone / WhatsApp", "value": "+91 83492 83228", "href": "tel:+918349283228" },
+      { "label": "LinkedIn", "value": "in/anil-anuragee", "href": "https://www.linkedin.com/in/anil-anuragee/" },
+      { "label": "GitHub", "value": "github.com/anil4use", "href": "https://github.com/anil4use" }
+    ]
+  }
+}

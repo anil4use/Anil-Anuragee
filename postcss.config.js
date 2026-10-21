@@ -1,6 +1,6 @@
-export default {
+module.exports = {
   plugins: {
-    tailwindcss: {},
+    tailwindcss: { config: '../../tailwind.config.ts' },
     autoprefixer: {},
   },
-}
+};

@@ -1,0 +1,13 @@
+[build]
+command = "npm run build --workspace apps/web"
+publish = "apps/web/.next"
+
+[functions]
+directory = "netlify/functions"
+node_bundler = "esbuild"
+
+[build.environment]
+NODE_VERSION = "22.16.0"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"

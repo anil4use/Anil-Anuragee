@@ -1,0 +1,12 @@
+{
+  "name": "@anil-portfolio/db",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "mongodb": "^6.10.0"
+  }
+}
