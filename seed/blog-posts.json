@@ -1,0 +1,96 @@
+[
+  {
+    "slug": "designing-reliable-ai-features",
+    "title": "Designing Reliable AI Features for Real Products",
+    "excerpt": "A sample look at the product habits that make AI features useful: narrow scope, observable output, and a clear human fallback.",
+    "category": "AI Engineering",
+    "tags": ["AI", "Product Engineering", "Reliability"],
+    "publishedAt": "2026-10-12",
+    "readTime": "5 min read",
+    "keywords": ["reliable AI features", "AI product engineering", "human in the loop"],
+    "sections": [
+      {
+        "heading": "Start with a small, testable job",
+        "paragraphs": [
+          "This sample article demonstrates the portfolio blog layout. It is illustrative content, not a report of a specific production system.",
+          "A useful AI feature begins with a bounded task and a measurable result. Define what a good response looks like, which inputs are allowed, and when the system should hand the decision back to a person."
+        ]
+      },
+      {
+        "heading": "Make uncertainty visible",
+        "paragraphs": [
+          "AI output should not look more certain than it is. Show source context where possible, make review easy, and record failures so the team can improve the workflow.",
+          "Treat evaluation as part of delivery: keep representative examples, check regressions, and measure quality against the task rather than relying on an impressive demo."
+        ]
+      },
+      {
+        "heading": "Design the fallback first",
+        "paragraphs": [
+          "Users need a clear path when a model is unavailable or a response needs review. A predictable fallback turns an experimental capability into a dependable product feature."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "from-api-contracts-to-faster-teams",
+    "title": "How Clear API Contracts Help Full-Stack Teams Move Faster",
+    "excerpt": "A practical sample guide to aligning frontend and backend work around stable request shapes, useful errors, and shared examples.",
+    "category": "Full-Stack Development",
+    "tags": ["APIs", "TypeScript", "Teamwork"],
+    "publishedAt": "2026-10-05",
+    "readTime": "4 min read",
+    "keywords": ["API contracts", "full stack development", "TypeScript API"],
+    "sections": [
+      {
+        "heading": "Agree on the shape before wiring screens",
+        "paragraphs": [
+          "This sample post is placeholder copy intended to preview the blog experience; it does not claim a particular project outcome.",
+          "A compact request and response example gives frontend and backend contributors a shared target. Include required fields, optional values, and the cases that should return an error."
+        ]
+      },
+      {
+        "heading": "Make errors part of the contract",
+        "paragraphs": [
+          "A consistent error shape lets interfaces explain what went wrong and lets tests check behavior without guessing. Include stable codes for expected failures and avoid leaking implementation details."
+        ]
+      },
+      {
+        "heading": "Keep examples close to the code",
+        "paragraphs": [
+          "Document the contract where the team can validate it. Lightweight schema validation and a few integration tests help detect drift before it reaches users."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "a-practical-figma-to-code-review-loop",
+    "title": "A Practical Figma-to-Code Review Loop",
+    "excerpt": "A sample workflow for translating design tokens and component states into a focused visual review instead of a last-minute pixel hunt.",
+    "category": "Frontend Engineering",
+    "tags": ["React", "Design Systems", "Tailwind CSS"],
+    "publishedAt": "2026-09-28",
+    "readTime": "6 min read",
+    "keywords": ["Figma to code", "design tokens", "frontend visual review"],
+    "sections": [
+      {
+        "heading": "Extract the rules, not just the screenshot",
+        "paragraphs": [
+          "This illustrative article previews a design and is sample content only. It is not a published case study.",
+          "Before implementing a screen, identify the reusable rules behind it: spacing, color roles, typography, breakpoints, and interaction states. Encoding those rules as tokens makes later updates cheaper."
+        ]
+      },
+      {
+        "heading": "Review component states",
+        "paragraphs": [
+          "A page can match a static screenshot and still fail in use. Review hover, focus, loading, empty, and narrow-screen states alongside the default layout."
+        ]
+      },
+      {
+        "heading": "Use focused visual checks",
+        "paragraphs": [
+          "Compare a few representative viewport sizes and prioritize differences by user impact. Fix shared components and token mismatches before polishing isolated details."
+        ]
+      }
+    ]
+  }
+]
