@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
-import { generateDraftBatch } from '../../apps/admin/src/lib/ai-generator';
-import { resolveAiSettings } from '../../apps/admin/src/lib/ai-schema';
+import { generateDraftBatch } from '../../apps/web/src/lib/ai-generator';
+import { resolveAiSettings } from '../../apps/web/src/lib/ai-schema';
 
 export const config = {
   schedule: '*/5 * * * *',

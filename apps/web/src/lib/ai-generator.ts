@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import type { Collection, Document } from 'mongodb';
 import { z } from 'zod';
-import type { AiSettings } from '@/lib/ai-schema';
+import type { AiSettings } from './ai-schema';
 
 const generatedArticleSchema = z.object({
   title: z.string().min(12).max(160),
