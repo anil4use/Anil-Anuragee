@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { PortfolioInteractions, ThemeToggle, TypingRole } from '@/components/interactive/PortfolioInteractions';
 import { SectionNavigation } from '@/components/interactive/SectionNavigation';
 import type { BlogPostSummary } from '@/lib/blog';
+import { formatIndiaDateTime } from '@/lib/date-format';
 import type { PortfolioData, PortfolioSection } from '@/lib/portfolio';
 
 const sectionLabels: Record<string, string> = {
@@ -25,6 +26,16 @@ function SectionTitle({ title }: { title: string }) {
 function journeyTimestamp(date: string): number | null {
   const timestamp = Date.parse(`1 ${date}`);
   return Number.isNaN(timestamp) ? null : timestamp;
+}
+
+function safeProjectUrl(value?: string): string | undefined {
+  if (!value?.trim()) return undefined;
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' || url.protocol === 'http:' ? url.href : undefined;
+  } catch {
+    return undefined;
+  }
 }
 
 export function PortfolioHome({
@@ -219,20 +230,34 @@ export function PortfolioHome({
           <SectionTitle title={portfolio.sectionCopy.projectsTitle} />
           <p className="sub">{portfolio.sectionCopy.projectsSubtitle}</p>
           <div className="g2">
-            {portfolio.projects.map((project) => (
-              <div key={project.name} className="glass project-card">
-                <span className="ico">{project.emoji}</span>
-                <h3>{project.name}</h3>
-                <p>{project.description}</p>
-                <div className="chip-row">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="chip">
-                      {tag}
-                    </span>
-                  ))}
+            {portfolio.projects.map((project) => {
+              const liveUrl = safeProjectUrl(project.liveUrl);
+              return (
+                <div key={project.name} className="glass project-card">
+                  <span className="ico">{project.emoji}</span>
+                  <h3>{project.name}</h3>
+                  <p>{project.description}</p>
+                  <div className="chip-row">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="chip">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  {liveUrl && (
+                    <a
+                      className="project-live-link"
+                      href={liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`View ${project.name} live`}
+                    >
+                      View project <span aria-hidden="true">↗</span>
+                    </a>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>}
 
@@ -309,7 +334,7 @@ export function PortfolioHome({
                 </h3>
                 <p>{post.excerpt}</p>
                 <div className="blog-meta">
-                  <time dateTime={post.publishedAt}>{post.publishedAt}</time>
+                  <time dateTime={post.publishedAt}>{formatIndiaDateTime(post.publishedAt)}</time>
                   <span>{post.readTime}</span>
                 </div>
                 <Link className="blog-read-more" href={`/blog/${post.slug}`}>

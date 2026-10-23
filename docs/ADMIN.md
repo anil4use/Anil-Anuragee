@@ -30,3 +30,6 @@ labels are syntax highlighted and include a copy button.
 
 To replace the Resume, open the Portfolio content tab, upload a PDF (maximum 10 MB), and select
 “Save portfolio.” The public hero download link uses the saved Resume URL.
+
+Portfolio projects support an optional `liveUrl` field. Set it to an HTTP or HTTPS URL to show a
+“View project” link on the public project card; leave it blank to hide the link.

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import { JsonTreeEditor } from '@/components/JsonTreeEditor';
+import { formatIndiaDateTime, fromIndiaDateTimeInput, toIndiaDateTimeInput } from '@/lib/date-format';
 
 type BlogStatus = 'draft' | 'scheduled' | 'published';
 type AdminTab = 'blog' | 'portfolio';
@@ -90,13 +91,6 @@ const blankPost = (): Post => ({
   noindex: false,
   publishedAt: null,
 });
-
-function toLocalDateTime(value: string | null) {
-  if (!value) return '';
-  const date = new Date(value);
-  const offset = date.getTimezoneOffset() * 60_000;
-  return new Date(date.getTime() - offset).toISOString().slice(0, 16);
-}
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -383,7 +377,7 @@ export function AdminPortal() {
       });
       const result = await readJsonResponse<{ error?: string; updatedAt?: string }>(response);
       if (!response.ok) throw new Error(result.error || 'Unable to save portfolio.');
-      setMessage(`Portfolio changes saved${result.updatedAt ? ` at ${new Date(result.updatedAt).toLocaleTimeString()}` : ''}. Refresh the public site to verify.`);
+      setMessage(`Portfolio changes saved${result.updatedAt ? ` at ${formatIndiaDateTime(result.updatedAt)}` : ''}. Refresh the public site to verify.`);
     } catch (saveError) {
       setError(saveError instanceof Error ? saveError.message : 'Unable to save portfolio.');
     } finally {
@@ -1160,8 +1154,8 @@ export function AdminPortal() {
               </label>
               {post.status === 'scheduled' && (
                 <label>
-                  Publish date and time
-                  <input type="datetime-local" required value={toLocalDateTime(post.scheduledAt)} onChange={(event) => update('scheduledAt', event.target.value ? new Date(event.target.value).toISOString() : null)} />
+                  Publish date and time (India time, IST)
+                  <input type="datetime-local" required value={toIndiaDateTimeInput(post.scheduledAt)} onChange={(event) => update('scheduledAt', event.target.value ? fromIndiaDateTimeInput(event.target.value) : null)} />
                 </label>
               )}
               <button className="admin-primary" type="submit" disabled={busy}>{busy ? 'Saving…' : post.status === 'published' ? 'Save & publish' : post.status === 'scheduled' ? 'Save schedule' : 'Save draft'}</button>

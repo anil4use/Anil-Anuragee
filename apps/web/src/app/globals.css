@@ -575,6 +575,26 @@ h1 {
   text-decoration: none;
 }
 
+.project-live-link {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  color: var(--a);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.project-live-link span {
+  transition: transform 150ms ease;
+}
+
+.project-live-link:hover span {
+  transform: translate(2px, -2px);
+}
+
 .ico {
   font-size: 26px;
   display: block;
@@ -663,6 +683,44 @@ h1 {
   margin: 0 auto 34px;
 }
 
+.blog-index-header {
+  max-width: none;
+  margin: 18px 0 30px;
+  padding: clamp(24px, 5vw, 44px);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 100% 0, color-mix(in srgb, var(--a) 13%, transparent), transparent 48%),
+    var(--surf);
+}
+
+.blog-index-header .eyebrow {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.blog-index-header h1 {
+  max-width: 760px;
+  margin: 0 0 12px;
+  font-size: clamp(36px, 6vw, 60px);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.blog-index-header > p {
+  max-width: 690px;
+  margin: 0;
+  line-height: 1.65;
+}
+
+.blog-index-count {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+}
+
 .eyebrow,
 .blog-category {
   color: var(--b);
@@ -685,9 +743,9 @@ h1 {
 .blog-category-filters {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 9px;
-  margin: 0 auto 28px;
+  margin: 0 0 24px;
 }
 
 .blog-category-filters a {
@@ -717,9 +775,17 @@ h1 {
 .blog-card {
   display: flex;
   flex-direction: column;
-  min-height: 270px;
+  min-height: 300px;
   overflow: hidden;
   padding: 0;
+  border-color: color-mix(in srgb, var(--line) 80%, transparent);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--a) 38%, var(--line));
+  box-shadow: 0 16px 36px color-mix(in srgb, var(--text) 9%, transparent);
 }
 
 .blog-card > :not(.blog-card-image-link) {
@@ -764,6 +830,7 @@ h1 {
 
 .blog-card > p {
   flex: 1;
+  line-height: 1.65;
 }
 
 .blog-card-top,
@@ -783,7 +850,9 @@ h1 {
 }
 
 .blog-meta {
-  margin: 12px 0;
+  margin: auto 20px 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 13px;
 }
@@ -798,6 +867,13 @@ h1 {
   margin: 22px 0;
   color: var(--muted);
   font-size: 13px;
+}
+
+.blog-page > .sample-disclaimer {
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surf);
 }
 
 .article-page {

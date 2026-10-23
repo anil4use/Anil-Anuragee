@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getPublishedPosts } from '@/lib/blog';
+import { formatIndiaDateTime } from '@/lib/date-format';
 import { SITE_URL } from '@/lib/site';
 
 export const dynamic = 'force-dynamic';
@@ -46,13 +47,16 @@ export default async function BlogIndexPage({
       <Link href="/" className="back-link">
         ← Back to portfolio
       </Link>
-      <header className="blog-header">
-        <span className="eyebrow">ANIL ANURAGEE · ENGINEERING NOTES</span>
-        <h1>AI, MERN & modern engineering</h1>
+      <header className="blog-header blog-index-header">
+        <span className="eyebrow">ANIL ANURAGEE <span aria-hidden="true">·</span> ENGINEERING NOTES</span>
+        <h1>Engineering notes for building what’s next.</h1>
         <p>
-          Practical notes on AI engineering, MERN stack, production bugs, security vulnerabilities,
-          and new technologies.
+          Practical guides on AI engineering, MERN, production issues, security, and the tools shaping modern software.
         </p>
+        <span className="blog-index-count">
+          {visiblePosts.length} {visiblePosts.length === 1 ? 'article' : 'articles'}
+          {selectedCategory ? ` in ${selectedCategory}` : ''}
+        </span>
       </header>
       {categories.length > 0 && (
         <nav className="blog-category-filters" aria-label="Filter articles by category">
@@ -99,13 +103,7 @@ export default async function BlogIndexPage({
             </h2>
             <p className="text-muted">{post.excerpt}</p>
             <div className="blog-meta">
-              <time dateTime={post.publishedAt}>
-                {new Date(post.publishedAt).toLocaleDateString('en-IN', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric',
-                })}
-              </time>
+              <time dateTime={post.publishedAt}>{formatIndiaDateTime(post.publishedAt)}</time>
               <span>{post.readTime}</span>
             </div>
             <div className="chip-row">

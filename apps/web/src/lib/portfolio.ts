@@ -2,6 +2,10 @@ import portfolioData from '../../../../seed/portfolio.json';
 import { getDatabase } from '@db';
 
 export type PortfolioData = typeof portfolioData;
+export type PortfolioProject = (typeof portfolioData.projects)[number] & { liveUrl?: string };
+const portfolioProjectMigrationVersion = 3;
+const newlyAddedProjectName = 'API Performance Tester';
+const removedProjectNames = new Set(['E-Kisan', 'RE-Course']);
 
 export type PortfolioSection = {
   id: string;
@@ -68,6 +72,28 @@ export function mergePortfolioWithDefaults<T>(defaults: T, stored: unknown): T {
   return (stored === undefined ? defaults : stored) as T;
 }
 
+export function applyPortfolioProjectMigration(
+  content: PortfolioData,
+  migrationVersion: number | undefined,
+): PortfolioData {
+  if (migrationVersion !== undefined && migrationVersion >= portfolioProjectMigrationVersion) {
+    return content;
+  }
+
+  const projects: PortfolioProject[] = content.projects
+    .filter((project) => !removedProjectNames.has(project.name))
+    .map((project) => ({ ...project, liveUrl: project.liveUrl ?? '' }));
+  const newProject = portfolioData.projects.find((project) => project.name === newlyAddedProjectName);
+  if (newProject && !projects.some((project) => project.name === newlyAddedProjectName)) {
+    projects.push(newProject);
+  }
+
+  return projects.length === content.projects.length &&
+    content.projects.every((project, index) => project.liveUrl === projects[index].liveUrl)
+    ? content
+    : { ...content, projects } as PortfolioData;
+}
+
 export async function getPortfolioContent(): Promise<{
   content: PortfolioData;
   sections: PortfolioSection[];
@@ -82,7 +108,7 @@ export async function getPortfolioContent(): Promise<{
 
   const content = Object.fromEntries(
     Object.entries(stored).filter(
-      ([key]) => !['_id', 'name', 'seededAt', 'updatedAt', 'sectionSettings'].includes(key),
+      ([key]) => !['_id', 'name', 'seededAt', 'updatedAt', 'sectionSettings', 'projectMigrations'].includes(key),
     ),
   );
   const sectionSettings = stored.sectionSettings;
@@ -97,7 +123,10 @@ export async function getPortfolioContent(): Promise<{
   });
 
   return {
-    content: mergePortfolioWithDefaults(portfolioData, content),
+    content: applyPortfolioProjectMigration(
+      mergePortfolioWithDefaults(portfolioData, content),
+      stored.projectMigrations as number | undefined,
+    ),
     sections: mergedSections.sort((a, b) => a.order - b.order),
   };
 }

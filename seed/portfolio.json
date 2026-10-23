@@ -183,34 +183,32 @@
   ],
   "projects": [
     {
-      "name": "E-Kisan",
-      "emoji": "🌾",
-      "description": "Marketplace for farmers with MapBox store locator, Razorpay payments, and advanced filtering and sorting.",
-      "tags": ["React", "Redux Toolkit", "Tailwind", "MapBox"]
-    },
-    {
-      "name": "RE-Course",
-      "emoji": "🎓",
-      "description": "E-learning platform with keyword search, Razorpay checkout, authentication, and an admin dashboard for users and courses.",
-      "tags": ["React", "Node.js", "MongoDB", "Chakra UI"]
-    },
-    {
       "name": "NeutriCare",
       "emoji": "🥗",
       "description": "Diet-plan app with customizable plans based on inputs and subscription management.",
+      "liveUrl": "",
       "tags": ["React", "Bootstrap"]
     },
     {
       "name": "Accelerated",
       "emoji": "📈",
       "description": "Platform that expands web app reach through A/B testing, with licensing and performance tracking.",
+      "liveUrl": "",
       "tags": ["Express", "MongoDB", "GraphQL"]
     },
     {
       "name": "Figma-to-code workflow",
       "emoji": "🎨",
       "description": "A structured Claude Code prompt that pulls Figma node data via API, extracts CSS tokens, and runs a pixel-perfect audit to cut review cycles. Shared publicly with the community.",
+      "liveUrl": "",
       "tags": ["Claude Code", "Figma API", "React", "Tailwind"]
+    },
+    {
+      "name": "API Performance Tester",
+      "emoji": "📊",
+      "description": "A local workbench for authorized API performance and reliability testing, with worker-based load generation, live metrics, run history, and target-safety checks.",
+      "liveUrl": "",
+      "tags": ["Next.js", "TypeScript", "Node.js", "Worker Threads", "MongoDB"]
     }
   ],
   "journey": [
@@ -262,7 +260,7 @@
   "sectionCopy": {
     "experienceTitle": "Work experience",
     "projectsTitle": "More projects",
-    "projectsSubtitle": "Products built across e-commerce, e-learning, health, and growth tooling.",
+    "projectsSubtitle": "Selected products, developer tools, and experiments built with modern web technologies.",
     "journeyTitle": "My journey",
     "journeySubtitle": "From campus to AI products in production.",
     "writingTitle": "Sharing & community",

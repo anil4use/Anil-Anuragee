@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArticleContent } from '@/components/ArticleContent';
 import { getPublishedPost, renderArticleMarkdown } from '@/lib/blog';
+import { formatIndiaDateTime } from '@/lib/date-format';
 import { SITE_URL, serializeJsonLd } from '@/lib/site';
 
 type BlogPageProps = {
@@ -96,13 +97,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
           <p>{post.excerpt}</p>
           <div className="blog-meta">
             <span>By Anil Anuragee</span>
-            <time dateTime={post.publishedAt}>
-              {new Date(post.publishedAt).toLocaleDateString('en-IN', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              })}
-            </time>
+            <time dateTime={post.publishedAt}>{formatIndiaDateTime(post.publishedAt)}</time>
             <span>{post.readTime}</span>
           </div>
         </header>

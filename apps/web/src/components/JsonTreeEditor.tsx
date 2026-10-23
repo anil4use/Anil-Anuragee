@@ -23,7 +23,7 @@ function emptyObjectFor(arrayName: string): Record<string, unknown> {
     stats: { value: '', suffix: '', label: '' },
     metrics: { title: '', value: '' },
     experience: { period: '', role: '', company: '', bullets: [''], tags: [''] },
-    projects: { name: '', emoji: '', description: '', tags: [''] },
+    projects: { name: '', emoji: '', description: '', liveUrl: '', tags: [''] },
     journey: { date: '', title: '' },
     items: { name: '', meta: '', icon: '', tags: [''] },
     writing: { title: '', description: '', href: '', icon: '' },

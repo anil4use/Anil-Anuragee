@@ -3,7 +3,7 @@ import { getDatabase } from '@db';
 import { hasRequestAdminSession, isAllowedOrigin } from '@/lib/auth';
 import { defaultPortfolioSections } from '@/lib/portfolio-defaults';
 import { portfolioSaveSchema } from '@/lib/portfolio-schema';
-import { mergePortfolioWithDefaults } from '@/lib/portfolio';
+import { applyPortfolioProjectMigration, mergePortfolioWithDefaults } from '@/lib/portfolio';
 import seed from '../../../../../../seed/portfolio.json';
 
 export const runtime = 'nodejs';
@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
     }
     const content = Object.fromEntries(
       Object.entries(stored).filter(
-        ([key]) => !['_id', 'name', 'seededAt', 'updatedAt', 'sectionSettings'].includes(key),
+        ([key]) => !['_id', 'name', 'seededAt', 'updatedAt', 'sectionSettings', 'projectMigrations'].includes(key),
       ),
     );
     const sectionSettings = stored.sectionSettings;
@@ -32,7 +32,13 @@ export async function GET(request: NextRequest) {
         : undefined;
       return saved ? { ...base, enabled: saved.enabled, order: saved.order } : base;
     }).sort((left, right) => left.order - right.order);
-    return NextResponse.json({ content: mergePortfolioWithDefaults(seed, content), sections });
+    return NextResponse.json({
+      content: applyPortfolioProjectMigration(
+        mergePortfolioWithDefaults(seed, content),
+        stored.projectMigrations as number | undefined,
+      ),
+      sections,
+    });
   } catch (error) {
     console.error('Unable to load portfolio content:', error);
     return NextResponse.json({ error: 'Unable to load portfolio. Check MongoDB configuration.' }, { status: 503 });
@@ -69,6 +75,7 @@ export async function PUT(request: NextRequest) {
     const document = {
       ...parsed.data.content,
       name: seed.site.name,
+      projectMigrations: 3,
       sectionSettings: [...parsed.data.sections].sort((a, b) => a.order - b.order),
       updatedAt: new Date().toISOString(),
     };
