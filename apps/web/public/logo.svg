@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 64" role="img" aria-labelledby="title">
+  <title id="title">𝞓𝞰𝙞𝞲</title>
+  <defs>
+    <linearGradient id="brand" x1="0" x2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#0891b2"/>
+    </linearGradient>
+  </defs>
+  <text x="4" y="50" fill="url(#brand)" font-family="Segoe UI Symbol, Noto Sans Math, sans-serif" font-size="48" font-weight="700" textLength="184" lengthAdjust="spacingAndGlyphs">𝞓𝞰𝙞𝞲</text>
+</svg>

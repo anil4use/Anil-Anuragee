@@ -57,7 +57,9 @@ export function PortfolioHome({
       <PortfolioInteractions />
       <nav className="topbar">
         <div className="w">
-          <a className="logo" href="#top">ANIL.</a>
+          <a className="logo" href="#top" aria-label="Anil Anuragee home">
+            <Image src="/logo.svg" alt="" width={96} height={32} priority />
+          </a>
           <SectionNavigation
             sections={sectionSettings
               .filter((section) => section.id !== 'hero' && section.enabled)
