@@ -37,7 +37,10 @@ export default async function Page() {
       'TypeScript',
       'Node.js',
       'MySQL',
-      'AI product engineering',
+      'AI engineering',
+      'MERN stack development',
+      'Application security',
+      'Production debugging',
     ],
   };
 

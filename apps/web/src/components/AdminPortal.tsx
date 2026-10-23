@@ -6,7 +6,8 @@ import type { FormEvent } from 'react';
 import { JsonTreeEditor } from '@/components/JsonTreeEditor';
 
 type BlogStatus = 'draft' | 'scheduled' | 'published';
-type AdminTab = 'blog' | 'portfolio' | 'ai';
+type AdminTab = 'blog' | 'portfolio';
+type BlogPanel = 'posts' | 'ai';
 type EditableSection = {
   id: string;
   label: string;
@@ -37,7 +38,14 @@ const defaultAiSettings: AiSettings = {
   autoPublishEnabled: false,
   publishDelayMinutes: 10,
   topicMode: 'mixed',
-  categories: ['AI product engineering', 'React and Next.js', 'TypeScript', 'Node.js and APIs'],
+  categories: [
+    'AI Engineering',
+    'MERN Stack Engineering',
+    'Bugs & Production Issues',
+    'Security & Vulnerabilities',
+    'New Technology & Developer Tools',
+    'Static Site Engineering',
+  ],
   promptInstructions:
     'Write useful, technically accurate articles. Cite current sources for news-based claims. Do not invent personal experiences or results.',
 };
@@ -94,6 +102,18 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
+async function readJsonResponse<T>(response: Response): Promise<T> {
+  const body = await response.text();
+  if (!body.trim()) {
+    throw new Error(`The server returned an empty response (HTTP ${response.status}). Please retry; if it continues, check the deployment logs.`);
+  }
+  try {
+    return JSON.parse(body) as T;
+  } catch {
+    throw new Error(`The server returned an invalid response (HTTP ${response.status}). Please retry; if it continues, check the deployment logs.`);
+  }
+}
+
 function getResumeUrl(portfolio: unknown): string {
   if (!isRecord(portfolio) || !isRecord(portfolio.site)) return '';
   return typeof portfolio.site.resumeUrl === 'string' ? portfolio.site.resumeUrl : '';
@@ -111,6 +131,7 @@ export function AdminPortal() {
   const [busy, setBusy] = useState(false);
   const [search, setSearch] = useState('');
   const [activeTab, setActiveTab] = useState<AdminTab>('blog');
+  const [blogPanel, setBlogPanel] = useState<BlogPanel>('posts');
   const [portfolioJson, setPortfolioJson] = useState('');
   const [portfolioView, setPortfolioView] = useState<'form' | 'json'>('form');
   const [portfolioSections, setPortfolioSections] = useState<EditableSection[]>([]);
@@ -132,7 +153,7 @@ export function AdminPortal() {
     setError('');
     try {
       const response = await fetch('/api/posts', { cache: 'no-store' });
-      const result = (await response.json()) as { posts?: Post[]; error?: string };
+      const result = await readJsonResponse<{ posts?: Post[]; error?: string }>(response);
       if (!response.ok) throw new Error(result.error || 'Unable to load blog posts.');
       setPosts(result.posts || []);
     } catch (loadError) {
@@ -144,11 +165,11 @@ export function AdminPortal() {
     setError('');
     try {
       const response = await fetch('/api/portfolio', { cache: 'no-store' });
-      const result = (await response.json()) as {
+      const result = await readJsonResponse<{
         content?: Record<string, unknown>;
         sections?: EditableSection[];
         error?: string;
-      };
+      }>(response);
       if (!response.ok || !result.content || !result.sections) {
         throw new Error(result.error || 'Unable to load portfolio content.');
       }
@@ -162,10 +183,10 @@ export function AdminPortal() {
   const loadAiSettings = useCallback(async () => {
     try {
       const response = await fetch('/api/ai/settings', { cache: 'no-store' });
-      const result = (await response.json()) as {
+      const result = await readJsonResponse<{
         settings?: Partial<AiSettings> & Record<string, unknown>;
         error?: string;
-      };
+      }>(response);
       if (!response.ok || !result.settings) {
         throw new Error(result.error || 'Unable to load AI writing settings.');
       }
@@ -187,7 +208,7 @@ export function AdminPortal() {
     fetch('/api/auth/session', { cache: 'no-store' })
       .then(async (response) => {
         if (!response.ok) throw new Error('Could not check admin session.');
-        const result = (await response.json()) as { authenticated: boolean };
+        const result = await readJsonResponse<{ authenticated: boolean }>(response);
         if (!active) return;
         setAuthenticated(result.authenticated);
         if (result.authenticated) {
@@ -214,7 +235,7 @@ export function AdminPortal() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-      const result = (await response.json()) as { error?: string };
+      const result = await readJsonResponse<{ error?: string }>(response);
       if (!response.ok) throw new Error(result.error || 'Login failed.');
       setPassword('');
       setAuthenticated(true);
@@ -248,7 +269,7 @@ export function AdminPortal() {
     setError('');
     try {
       const response = await fetch(`/api/posts/${encodeURIComponent(selected.slug)}`, { cache: 'no-store' });
-      const result = (await response.json()) as { post?: Post; error?: string };
+      const result = await readJsonResponse<{ post?: Post; error?: string }>(response);
       if (!response.ok || !result.post) throw new Error(result.error || 'Unable to load article.');
       setPost(result.post);
       setOriginalSlug(result.post.slug);
@@ -292,7 +313,7 @@ export function AdminPortal() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
-      const result = (await response.json()) as { post?: Post; error?: string };
+      const result = await readJsonResponse<{ post?: Post; error?: string }>(response);
       if (!response.ok) throw new Error(result.error || 'Unable to save post.');
       if (!result.post) throw new Error('The server returned no saved post.');
       setPost(result.post);
@@ -312,7 +333,7 @@ export function AdminPortal() {
     setError('');
     try {
       const response = await fetch(`/api/posts/${encodeURIComponent(originalSlug)}`, { method: 'DELETE' });
-      const result = (await response.json()) as { error?: string };
+      const result = await readJsonResponse<{ error?: string }>(response);
       if (!response.ok) throw new Error(result.error || 'Unable to delete post.');
       setPost(blankPost());
       setOriginalSlug(null);
@@ -359,7 +380,7 @@ export function AdminPortal() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content, sections: portfolioSections }),
       });
-      const result = (await response.json()) as { error?: string; updatedAt?: string };
+      const result = await readJsonResponse<{ error?: string; updatedAt?: string }>(response);
       if (!response.ok) throw new Error(result.error || 'Unable to save portfolio.');
       setMessage(`Portfolio changes saved${result.updatedAt ? ` at ${new Date(result.updatedAt).toLocaleTimeString()}` : ''}. Refresh the public site to verify.`);
     } catch (saveError) {
@@ -383,7 +404,7 @@ export function AdminPortal() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ provider: aiSettings.provider, model: aiSettings.model }),
       });
-      const result = (await response.json()) as { available?: boolean; message?: string; error?: string };
+      const result = await readJsonResponse<{ available?: boolean; message?: string; error?: string }>(response);
       if (!response.ok) throw new Error(result.error || 'Unable to check the selected model.');
       setAiModelCheck(result.message || (result.available ? 'Model is available.' : 'Model is unavailable.'));
     } catch (checkError) {
@@ -403,7 +424,7 @@ export function AdminPortal() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(aiSettings),
       });
-      const result = (await response.json()) as { error?: string };
+      const result = await readJsonResponse<{ error?: string }>(response);
       if (!response.ok) throw new Error(result.error || 'Unable to save AI settings.');
       setMessage('AI drafting and publication settings saved.');
       await loadAiSettings();
@@ -424,17 +445,17 @@ export function AdminPortal() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(aiSettings),
       });
-      const settingsResult = (await settingsResponse.json()) as { error?: string };
+      const settingsResult = await readJsonResponse<{ error?: string }>(settingsResponse);
       if (!settingsResponse.ok) throw new Error(settingsResult.error || 'Save valid AI settings before generating.');
 
       const response = await fetch('/api/ai/generate', { method: 'POST' });
-      const result = (await response.json()) as {
+      const result = await readJsonResponse<{
         count?: number;
         sourceCount?: number;
         error?: string;
-      };
+      }>(response);
       if (!response.ok) throw new Error(result.error || 'AI draft generation failed.');
-      setMessage(`Generated ${result.count || 0} draft(s) using ${result.sourceCount || 0} current news sources. Open the Blog posts tab to review.`);
+      setMessage(`Generated ${result.count || 0} draft(s) using ${result.sourceCount || 0} current news sources. Open Posts to review.`);
       await Promise.all([loadPosts(), loadAiSettings()]);
     } catch (generationError) {
       setError(generationError instanceof Error ? generationError.message : 'AI draft generation failed.');
@@ -487,7 +508,7 @@ export function AdminPortal() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ slug: post.slug }),
       });
-      const signed = (await signedResponse.json()) as {
+      const signed = await readJsonResponse<{
         cloudName?: string;
         apiKey?: string;
         timestamp?: number;
@@ -497,7 +518,7 @@ export function AdminPortal() {
         maxFileSize?: number;
         signature?: string;
         error?: string;
-      };
+      }>(signedResponse);
       if (!signedResponse.ok) throw new Error(signed.error || 'Unable to authorize upload.');
       if (
         !signed.cloudName ||
@@ -525,7 +546,7 @@ export function AdminPortal() {
         method: 'POST',
         body: data,
       });
-      const uploaded = (await uploadResponse.json()) as { secure_url?: string; error?: { message?: string } };
+      const uploaded = await readJsonResponse<{ secure_url?: string; error?: { message?: string } }>(uploadResponse);
       if (!uploadResponse.ok || !uploaded.secure_url) {
         throw new Error(uploaded.error?.message || 'Cloudinary image upload failed.');
       }
@@ -591,7 +612,7 @@ export function AdminPortal() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ assetType: 'resume' }),
       });
-      const signed = (await signedResponse.json()) as {
+      const signed = await readJsonResponse<{
         cloudName?: string;
         apiKey?: string;
         timestamp?: number;
@@ -602,7 +623,7 @@ export function AdminPortal() {
         resourceType?: string;
         signature?: string;
         error?: string;
-      };
+      }>(signedResponse);
       if (!signedResponse.ok) throw new Error(signed.error || 'Unable to authorize Resume upload.');
       if (
         !signed.cloudName ||
@@ -631,10 +652,10 @@ export function AdminPortal() {
         `https://api.cloudinary.com/v1_1/${signed.cloudName}/raw/upload`,
         { method: 'POST', body: data },
       );
-      const uploaded = (await uploadResponse.json()) as {
+      const uploaded = await readJsonResponse<{
         secure_url?: string;
         error?: { message?: string };
-      };
+      }>(uploadResponse);
       if (!uploadResponse.ok || !uploaded.secure_url) {
         throw new Error(uploaded.error?.message || 'Cloudinary Resume upload failed.');
       }
@@ -705,9 +726,9 @@ export function AdminPortal() {
           role="tab"
           aria-selected={activeTab === 'blog'}
           className={activeTab === 'blog' ? 'selected' : ''}
-          onClick={() => { setActiveTab('blog'); setError(''); setMessage(''); }}
+          onClick={() => { setActiveTab('blog'); setBlogPanel('posts'); setError(''); setMessage(''); }}
         >
-          Blog posts
+          Blog posts & AI
         </button>
         <button
           role="tab"
@@ -717,17 +738,30 @@ export function AdminPortal() {
         >
           Portfolio content
         </button>
-        <button
-          role="tab"
-          aria-selected={activeTab === 'ai'}
-          className={activeTab === 'ai' ? 'selected' : ''}
-          onClick={() => { setActiveTab('ai'); setError(''); setMessage(''); }}
-        >
-          AI & schedule
-        </button>
       </div>
 
-      {activeTab === 'ai' ? (
+      {activeTab === 'blog' && (
+        <div className="blog-panel-switch" role="group" aria-label="Blog tools">
+          <button
+            type="button"
+            aria-pressed={blogPanel === 'posts'}
+            className={blogPanel === 'posts' ? 'selected' : ''}
+            onClick={() => { setBlogPanel('posts'); setError(''); setMessage(''); }}
+          >
+            Posts
+          </button>
+          <button
+            type="button"
+            aria-pressed={blogPanel === 'ai'}
+            className={blogPanel === 'ai' ? 'selected' : ''}
+            onClick={() => { setBlogPanel('ai'); setError(''); setMessage(''); }}
+          >
+            AI & schedule
+          </button>
+        </div>
+      )}
+
+      {activeTab === 'blog' && blogPanel === 'ai' ? (
         <section className="admin-card ai-studio">
           <div className="portfolio-editor-heading">
             <div>
@@ -999,7 +1033,15 @@ export function AdminPortal() {
               </label>
               <label>
                 Category
-                <input required value={post.category} onChange={(event) => update('category', event.target.value)} placeholder="AI Engineering" />
+                <select required value={post.category} onChange={(event) => update('category', event.target.value)}>
+                  <option value="" disabled>Select a topic</option>
+                  {post.category && !aiSettings.categories.includes(post.category) && (
+                    <option value={post.category}>{post.category} · existing</option>
+                  )}
+                  {aiSettings.categories.map((category) => (
+                    <option key={category} value={category}>{category}</option>
+                  ))}
+                </select>
               </label>
               <label className="wide">
                 Excerpt

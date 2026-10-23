@@ -13,13 +13,16 @@ const loginSchema = z.object({
   password: z.string().min(1).max(256),
 });
 
-async function isRateLimited(request: NextRequest): Promise<boolean> {
+async function isRateLimited(request: NextRequest, email: string): Promise<boolean> {
   const address =
     request.headers.get('x-nf-client-connection-ip') ||
     request.headers.get('x-real-ip') ||
     request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
     'unknown';
-  const key = createHash('sha256').update(address).digest('hex');
+  const normalizedEmail = email.trim().toLowerCase();
+  const key = createHash('sha256')
+    .update(`admin-login-v2:${normalizedEmail}:${address}`)
+    .digest('hex');
   const collection = (await getDatabase()).collection<{
     _id: string;
     windowStart: Date;
@@ -67,7 +70,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    if (await isRateLimited(request)) {
+    if (await isRateLimited(request, parsed.data.email)) {
       return NextResponse.json(
         { error: 'Too many login attempts. Wait 15 minutes and try again.' },
         { status: 429 },

@@ -16,6 +16,24 @@ export const aiSettingsSchema = z.object({
 
 export type AiSettings = z.infer<typeof aiSettingsSchema>;
 
+export const focusBlogCategories = [
+  'AI Engineering',
+  'MERN Stack Engineering',
+  'Bugs & Production Issues',
+  'Security & Vulnerabilities',
+  'New Technology & Developer Tools',
+  'Static Site Engineering',
+];
+
+const previousDefaultCategories = [
+  'AI product engineering',
+  'React and Next.js',
+  'TypeScript',
+  'Node.js and APIs',
+  'Databases and system design',
+  'Developer productivity',
+];
+
 export const defaultAiSettings: AiSettings = {
   provider: 'gemini',
   model: 'gemini-3.8-flash',
@@ -26,20 +44,20 @@ export const defaultAiSettings: AiSettings = {
   autoPublishEnabled: false,
   publishDelayMinutes: 10,
   topicMode: 'mixed',
-  categories: [
-    'AI product engineering',
-    'React and Next.js',
-    'TypeScript',
-    'Node.js and APIs',
-    'Databases and system design',
-    'Developer productivity',
-  ],
+  categories: focusBlogCategories,
   promptInstructions:
     'Write practical, technically accurate articles for software engineers. Use original explanations, cite current source links for news-dependent claims, distinguish facts from opinion, and never invent personal experience or project metrics.',
 };
 
 export function resolveAiSettings(stored: Record<string, unknown> = {}): AiSettings {
   const merged = { ...defaultAiSettings, ...stored };
+  if (
+    Array.isArray(stored.categories) &&
+    stored.categories.length === previousDefaultCategories.length &&
+    stored.categories.every((category, index) => category === previousDefaultCategories[index])
+  ) {
+    merged.categories = focusBlogCategories;
+  }
   if (merged.provider === 'groq' && merged.model === 'llama-3.3-70b-versatile') {
     merged.model = 'openai/gpt-oss-120b';
   }

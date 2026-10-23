@@ -677,6 +677,32 @@ h1 {
   font-size: 18px;
 }
 
+.blog-category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin: 0 auto 28px;
+}
+
+.blog-category-filters a {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 13px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+  transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.blog-category-filters a:hover,
+.blog-category-filters a.selected {
+  border-color: var(--a);
+  color: var(--a);
+  background: color-mix(in srgb, var(--a) 8%, transparent);
+}
+
 .blog-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));

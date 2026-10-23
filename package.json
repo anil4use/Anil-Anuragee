@@ -16,7 +16,7 @@
     "build": "npm run build --workspace apps/web",
     "lint": "npm run lint --workspace apps/web",
     "typecheck": "npm run typecheck --workspace apps/web",
-    "db:seed": "node --env-file=.env.local scripts/db-seed.mjs"
+    "db:seed": "node --env-file=apps/web/.env.local scripts/db-seed.mjs"
   },
   "devDependencies": {
     "eslint": "^9.15.0",

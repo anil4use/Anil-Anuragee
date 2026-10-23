@@ -5,7 +5,13 @@ const optionalHttpsUrl = z
   .trim()
   .url()
   .max(2048)
-  .refine((value) => new URL(value).protocol === 'https:', 'Use an HTTPS URL.')
+  .refine((value) => {
+    try {
+      return new URL(value).protocol === 'https:';
+    } catch {
+      return false;
+    }
+  }, 'Use an HTTPS URL.')
   .or(z.literal(''))
   .optional();
 
