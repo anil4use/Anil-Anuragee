@@ -69,7 +69,7 @@ export function PortfolioHome({
 
       <main className="w portfolio-sections" id="top">
         {visible('hero') && <section className="hero" id="hero" style={{ order: order('hero') }}>
-          <div>
+          <div className="hero-copy">
             <span className="pill">
               <s />
               Open to full-stack &amp; Node.js roles · Remote / Hybrid / On-site
