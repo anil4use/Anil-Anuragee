@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { getPublishedPosts } from '@/lib/blog';
 import { SITE_URL } from '@/lib/site';
@@ -77,6 +78,18 @@ export default async function BlogIndexPage({
       <div className="blog-list grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
         {visiblePosts.map((post) => (
           <article key={post.slug} className="glass blog-card">
+            {post.ogImage && (
+              <Link className="blog-card-image-link" href={`/blog/${post.slug}`} tabIndex={-1} aria-hidden="true">
+                <Image
+                  className="blog-card-image"
+                  src={post.ogImage}
+                  alt=""
+                  width={800}
+                  height={450}
+                  unoptimized
+                />
+              </Link>
+            )}
             <div className="blog-card-top">
               <span className="blog-category">{post.category}</span>
               {post.isSample && <span className="sample-badge">Sample</span>}

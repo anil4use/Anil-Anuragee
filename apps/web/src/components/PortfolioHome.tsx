@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { PortfolioInteractions, ThemeToggle, TypingRole } from '@/components/interactive/PortfolioInteractions';
+import { SectionNavigation } from '@/components/interactive/SectionNavigation';
 import type { BlogPostSummary } from '@/lib/blog';
 import type { PortfolioData, PortfolioSection } from '@/lib/portfolio';
 
@@ -46,13 +47,11 @@ export function PortfolioHome({
       <nav className="topbar">
         <div className="w">
           <a className="logo" href="#top">ANIL.</a>
-          <ul className="nav-list">
-            {sectionSettings.filter((section) => section.id !== 'hero' && section.enabled).map((section) => (
-              <li key={section.id}>
-                <a href={`#${section.id}`}>{sectionLabels[section.id] || section.label}</a>
-              </li>
-            ))}
-          </ul>
+          <SectionNavigation
+            sections={sectionSettings
+              .filter((section) => section.id !== 'hero' && section.enabled)
+              .map((section) => ({ id: section.id, label: sectionLabels[section.id] || section.label }))}
+          />
           <ThemeToggle />
         </div>
       </nav>

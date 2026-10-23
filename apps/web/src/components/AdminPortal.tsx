@@ -139,6 +139,7 @@ export function AdminPortal() {
   const [aiRunSummary, setAiRunSummary] = useState('');
   const [aiModelCheck, setAiModelCheck] = useState('');
   const [checkingAiModel, setCheckingAiModel] = useState(false);
+  const [imageUploadMode, setImageUploadMode] = useState<'inline' | 'cover'>('inline');
   const fileInput = useRef<HTMLInputElement>(null);
   const resumeInput = useRef<HTMLInputElement>(null);
   const contentInput = useRef<HTMLTextAreaElement>(null);
@@ -551,23 +552,27 @@ export function AdminPortal() {
         throw new Error(uploaded.error?.message || 'Cloudinary image upload failed.');
       }
 
-      update('ogImage', uploaded.secure_url);
-      update('ogImageAlt', altText);
-      const imageMarkdown = `![${altText}](${uploaded.secure_url})`;
-      const editor = contentInput.current;
-      if (editor) {
-        const start = editor.selectionStart;
-        const end = editor.selectionEnd;
-        const next = `${post.contentMarkdown.slice(0, start)}${imageMarkdown}${post.contentMarkdown.slice(end)}`;
-        update('contentMarkdown', next);
-        requestAnimationFrame(() => {
-          editor.focus();
-          editor.setSelectionRange(start + imageMarkdown.length, start + imageMarkdown.length);
-        });
+      if (imageUploadMode === 'cover') {
+        update('ogImage', uploaded.secure_url);
+        update('ogImageAlt', altText);
+        setMessage('Featured image uploaded. Save the post to publish the image.');
       } else {
-        update('contentMarkdown', `${post.contentMarkdown}\n\n${imageMarkdown}`);
+        const imageMarkdown = `![${altText}](${uploaded.secure_url})`;
+        const editor = contentInput.current;
+        if (editor) {
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          const next = `${post.contentMarkdown.slice(0, start)}${imageMarkdown}${post.contentMarkdown.slice(end)}`;
+          update('contentMarkdown', next);
+          requestAnimationFrame(() => {
+            editor.focus();
+            editor.setSelectionRange(start + imageMarkdown.length, start + imageMarkdown.length);
+          });
+        } else {
+          update('contentMarkdown', `${post.contentMarkdown}\n\n${imageMarkdown}`);
+        }
+        setMessage('Image uploaded and inserted in the article.');
       }
-      setMessage('Image uploaded and inserted in the article.');
     } catch (uploadError) {
       setError(uploadError instanceof Error ? uploadError.message : 'Image upload failed.');
     } finally {
@@ -1057,11 +1062,48 @@ export function AdminPortal() {
               </label>
             </div>
 
-            <div className="content-label-row">
-              <label htmlFor="article-content">Article body (Markdown)</label>
-              <button type="button" className="admin-quiet" onClick={() => fileInput.current?.click()} disabled={busy}>Upload / insert image</button>
-              <input ref={fileInput} hidden type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => void uploadImage(event.target.files?.[0])} />
+            <div className="article-image-tools">
+              <div className="content-label-row">
+                <label htmlFor="article-content">Article body (Markdown)</label>
+                <button
+                  type="button"
+                  className="admin-quiet"
+                  onClick={() => { setImageUploadMode('inline'); fileInput.current?.click(); }}
+                  disabled={busy}
+                >
+                  Insert image in article
+                </button>
+                <button
+                  type="button"
+                  className="admin-quiet"
+                  onClick={() => { setImageUploadMode('cover'); fileInput.current?.click(); }}
+                  disabled={busy}
+                >
+                  Upload featured image
+                </button>
+                {post.ogImage && (
+                  <button
+                    type="button"
+                    className="admin-quiet"
+                    onClick={() => { update('ogImage', ''); update('ogImageAlt', ''); }}
+                    disabled={busy}
+                  >
+                    Remove featured image
+                  </button>
+                )}
+              </div>
+              {post.ogImage && (
+                <Image
+                  className="article-image-preview"
+                  src={post.ogImage}
+                  alt={post.ogImageAlt || 'Featured image preview'}
+                  width={1200}
+                  height={630}
+                  unoptimized
+                />
+              )}
             </div>
+              <input ref={fileInput} hidden type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => void uploadImage(event.target.files?.[0])} />
             <p className="admin-muted">Write the complete article here. Supports Markdown headings, paragraphs, lists, links, code blocks, and uploaded inline images.</p>
             <textarea
               id="article-content"
@@ -1092,7 +1134,7 @@ export function AdminPortal() {
                   <input type="url" value={post.canonicalUrl} onChange={(event) => update('canonicalUrl', event.target.value)} placeholder="https://example.com/original-article" />
                 </label>
                 <label>
-                  Social sharing image URL
+                  Featured / social image URL
                   <input type="url" value={post.ogImage} onChange={(event) => update('ogImage', event.target.value)} placeholder="Upload an image or enter an HTTPS URL" />
                 </label>
                 <label>

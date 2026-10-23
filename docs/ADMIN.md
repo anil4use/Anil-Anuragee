@@ -18,11 +18,15 @@ admin credentials, the session secret, MongoDB, Cloudinary, and any AI provider 
 environment variables. Never expose secrets through `NEXT_PUBLIC_` variables.
 Deploy with the root `netlify.toml`; the admin panel is part of that site, not a separate deployment.
 
-When consolidating an existing setup, move required values from `apps/admin/.env.local` to
-`apps/web/.env.local`; the unified app does not load the former.
+Keep local app and seed settings in `apps/web/.env.local`. The old `apps/admin/.env.local` is not
+used by the unified app.
 
 Without `MONGODB_URI`, the public site uses bundled sample blog posts. They are marked `noindex` and
 excluded from the sitemap.
+
+In the Blog posts editor, upload a featured image for the article card, article header, and social
+preview, or insert separate images inline in the Markdown body. Fenced code blocks with language
+labels are syntax highlighted and include a copy button.
 
 To replace the Resume, open the Portfolio content tab, upload a PDF (maximum 10 MB), and select
 “Save portfolio.” The public hero download link uses the saved Resume URL.

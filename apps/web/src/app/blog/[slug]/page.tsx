@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ArticleContent } from '@/components/ArticleContent';
 import { getPublishedPost, renderArticleMarkdown } from '@/lib/blog';
 import { SITE_URL, serializeJsonLd } from '@/lib/site';
 
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
       ...(post.ogImage ? { images: [post.ogImage] } : {}),
     },
     twitter: {
-      card: 'summary',
+      card: post.ogImage ? 'summary_large_image' : 'summary',
       title,
       description,
       ...(post.ogImage ? { images: [post.ogImage] } : {}),
@@ -115,7 +116,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
             unoptimized
           />
         )}
-        <div className="article-content" dangerouslySetInnerHTML={{ __html: articleHtml }} />
+        <ArticleContent html={articleHtml} />
         {post.isSample && (
           <p className="sample-disclaimer">
             This is demo content for the portfolio blog preview, not a published professional article.
